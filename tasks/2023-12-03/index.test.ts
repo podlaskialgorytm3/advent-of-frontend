@@ -28,4 +28,14 @@ describe('znajdzWorek', () => {
     const wynik = znajdzWorek(lokalizacje, mapa);
     expect(wynik).toBeNull();
   });
+
+  test('powinien ignorować wartości NaN, Infinity, lub -Infinity w mapie czasoprzestrzennej', () => {
+    const lokalizacje: Lokalizacja[] = [
+      { x: 1, y: 2, z: 3, czas: 4 },
+      { x: 5, y: 6, z: 7, czas: 8 },
+    ];
+    const mapa: MapaCzasoprzestrzenna = (x, y, z, czas) => Infinity;
+    const wynik = znajdzWorek(lokalizacje, mapa);
+    expect(wynik).toBeNull();
+  });
 });
